@@ -1,3 +1,5 @@
+import copy
+
 class Game(object):
     def __init__(self):
         self.state = {0: [4] * 6 + [0],
@@ -7,7 +9,7 @@ class Game(object):
         return
 
     def get_state(self):
-        return self.state
+        return copy.deepcopy(self.state)
 
     def get_player_turn(self):
         return self.player_turn
@@ -43,7 +45,7 @@ class Game(object):
         self.state[opposite_player_turn] = concat_states[7:len(concat_states)] + [self.state[opposite_player_turn][-1]]
 
         # Check for steal
-        if concat_states[pocket] == 1:
+        if concat_states[pocket] == 1 and pocket < 6:
             self.capture(pocket)
 
         # New turn if pocket isnt in store
@@ -54,9 +56,11 @@ class Game(object):
         self.state[self.player_turn][-1] += self.state[self.player_turn][pocket]
         self.state[self.player_turn][pocket] = 0
 
+        pocket = abs(5 - pocket)
         opposite_player_turn = 0 if self.player_turn == 1 else 1
         self.state[self.player_turn][-1] += self.state[opposite_player_turn][pocket]
         self.state[opposite_player_turn][pocket] = 0
+
 
     def is_terminal_state(self):
         # Is terminal state if one of the sides have no pieces
