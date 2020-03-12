@@ -38,13 +38,13 @@ class Game(object):
                 pocket = 0
             concat_states[pocket] += 1
 
-        # Check for steal
-        if concat_states[pocket] == 1:
-            self.capture(pocket)
-
         # Split states
         self.state[self.player_turn] = concat_states[0:7]
         self.state[opposite_player_turn] = concat_states[7:len(concat_states)] + [self.state[opposite_player_turn][-1]]
+
+        # Check for steal
+        if concat_states[pocket] == 1:
+            self.capture(pocket)
 
         # New turn if pocket isnt in store
         self.player_turn = opposite_player_turn if pocket != 6 else self.player_turn
