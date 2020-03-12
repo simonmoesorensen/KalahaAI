@@ -1,4 +1,4 @@
-class Game:
+class Game(object):
     def __init__(self):
         self.state = {0: [4] * 6 + [0],
                       1: [4] * 6 + [0]}
@@ -6,10 +6,18 @@ class Game:
         self.player_turn = 0
         return
 
+    def get_state(self):
+        return self.state
+
+    def get_player_turn(self):
+        return self.player_turn
+
     def move_piece(self, pocket):
         if pocket > 5:
             return
         if pocket < 0:
+            return
+        if self.state[self.player_turn][pocket] == 0:
             return
 
         # Get players information
@@ -35,8 +43,8 @@ class Game:
             self.capture(pocket)
 
         # Split states
-        self.state[self.player_turn] = concat_states[0:6]
-        self.state[opposite_player_turn] = concat_states[6:len(concat_states)]
+        self.state[self.player_turn] = concat_states[0:7]
+        self.state[opposite_player_turn] = concat_states[7:len(concat_states)] + [self.state[opposite_player_turn][-1]]
 
         # New turn if pocket isnt in store
         self.player_turn = opposite_player_turn if pocket != 6 else self.player_turn
