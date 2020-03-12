@@ -1,9 +1,28 @@
 from kalaha.game import Game
 
 
+def test_terminal_state():
+    return False
+
+def test_capture_pieces_on_end():
+    return False
+
+def test_extra_turn_player1():
+    game = Game()
+
+    game.move_piece(2)
+
+    assert game.get_player_turn() == 0
+
+def test_extra_turn_player2():
+    game = Game()
+
+    game.move_piece(0)
+    game.move_piece(2)
+
+    assert game.get_player_turn() == 1
 
 def test_player2_steal():
-    # Run game
     game = Game()
 
     game.move_piece(0)
