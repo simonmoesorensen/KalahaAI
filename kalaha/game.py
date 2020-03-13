@@ -44,8 +44,8 @@ class Game(object):
         self.state[self.player_turn] = concat_states[0:7]
         self.state[opposite_player_turn] = concat_states[7:len(concat_states)] + [self.state[opposite_player_turn][-1]]
 
-        # Check for steal
-        if concat_states[pocket] == 1 and pocket < 6:
+        # Check for steal if slot is empty, on own side, and the opponent has pieces
+        if concat_states[pocket] == 1 and pocket < 6 and concat_states[pocket + 7] > 0:
             self.capture(pocket)
 
         # New turn if pocket isnt in store
