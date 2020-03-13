@@ -10,25 +10,25 @@ def test_capture_pieces_on_end():
 def test_extra_turn_player1():
     game = Game()
 
-    game.move_piece(2)
+    game.take_slot(2)
 
     assert game.get_player_turn() == 0
 
 def test_extra_turn_player2():
     game = Game()
 
-    game.move_piece(0)
-    game.move_piece(2)
+    game.take_slot(0)
+    game.take_slot(2)
 
     assert game.get_player_turn() == 1
 
 def test_player2_steal():
     game = Game()
 
-    game.move_piece(0)
-    game.move_piece(4)
-    game.move_piece(0)
-    game.move_piece(0)  # Player 2 steals 7 from player 1
+    game.take_slot(0)
+    game.take_slot(4)
+    game.take_slot(0)
+    game.take_slot(0)  # Player 2 steals 7 from player 1
 
     state = game.get_state()
 
@@ -38,9 +38,9 @@ def test_player1_steal():
     # Run game
     game = Game()
 
-    game.move_piece(4)
-    game.move_piece(0)
-    game.move_piece(0)  # Player 1 steals 6 from player 2
+    game.take_slot(4)
+    game.take_slot(0)
+    game.take_slot(0)  # Player 1 steals 6 from player 2
 
     state = game.get_state()
 

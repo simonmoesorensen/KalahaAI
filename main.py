@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
         # Reverse slot if player 2 is playing
         slot = abs(5 - slot) if game.get_player_turn() == 1 else slot
-        game.move_piece(slot)
+        game.take_slot(slot)
 
         if game.is_terminal_state():
             game.end_game()

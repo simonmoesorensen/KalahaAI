@@ -14,7 +14,7 @@ class Game(object):
     def get_player_turn(self):
         return self.player_turn
 
-    def move_piece(self, pocket):
+    def take_slot(self, pocket):
         if pocket > 5:
             return
         if pocket < 0:
