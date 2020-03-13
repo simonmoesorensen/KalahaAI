@@ -22,22 +22,23 @@ if __name__ == "__main__":
     should_end = game.is_terminal_state()
 
     print("Running game (anti-clockwise)")
-
+    game_seq = []
     while not should_end:
         print_game(game)
 
         print("\nIt is player {0}'s turn".format(1 + game.get_player_turn()))
         slot = int(input("Choose which slot to pick up (index at 0): "))
-
+        game_seq.append(slot)
         # Reverse slot if player 2 is playing
         slot = abs(5 - slot) if game.get_player_turn() == 1 else slot
         game.take_slot(slot)
 
+        winner = 0
         if game.is_terminal_state():
-            game.end_game()
+            winner = game.end_game()
             should_end = True
+            print_game(game)
 
-    print("Game over")
-
-
+    print("Game over, winner is Player {0}".format(winner))
+    print("Game sequence:", game_seq)
 
