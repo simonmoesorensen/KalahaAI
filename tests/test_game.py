@@ -2,10 +2,44 @@ from kalaha.game import Game
 
 
 def test_terminal_state():
-    return False
+    game = Game()
+
+    # Sequence to end the game
+    game.take_slot(2)
+    game.take_slot(5)
+    game.take_slot(1)
+    game.take_slot(5)
+    game.take_slot(0)
+    game.take_slot(3)
+    game.take_slot(2)
+    game.take_slot(2)
+    game.take_slot(0)
+    game.take_slot(4)
+    game.take_slot(2)
+    game.take_slot(5)
+
+    assert game.is_terminal_state()
 
 def test_capture_pieces_on_end():
-    return False
+    game = Game()
+
+    # Sequence to end the game
+    game.take_slot(2)
+    game.take_slot(5)
+    game.take_slot(1)
+    game.take_slot(5)
+    game.take_slot(0)
+    game.take_slot(3)
+    game.take_slot(2)
+    game.take_slot(2)
+    game.take_slot(0)
+    game.take_slot(4)
+    game.take_slot(2)
+    game.take_slot(5)
+
+    game.end_game()
+    state = game.get_state()
+    assert state[0][6] == 42 and state[1][6] == 6 and sum(state[0][0:6] + state[1][0:6]) == 0
 
 def test_extra_turn_player1():
     game = Game()
