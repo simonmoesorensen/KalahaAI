@@ -31,7 +31,7 @@ class TreeBuilder:
 
         # Add child for all possible actions (moves)
         for i in range(0, 6):
-            game = copy.deepcopy(node.game)  # Separate game states across sibling nodes
+            game = copy.deepcopy(node.get_data())  # Separate game states across sibling nodes
 
             # Add child if it was a valid move
             if game.take_slot(i):
@@ -67,19 +67,19 @@ class TreeBuilder:
                 if 'children' in child:
                     # Node
                     child_node = Node(game)
-                    parent.children.append(child_node)
+                    parent.add_child(child_node)
                     iter_children(child['children'], child_node)
                 else:
                     # Leaf
                     child_node = Leaf(game)
-                    parent.children.append(child_node)
+                    parent.add_child(child_node)
 
         iter_children(dict['children'], self.root)
 
 
 class Node:
-    def __init__(self, game):
-        self.game = game
+    def __init__(self, data):
+        self.data = data
         self.children = []
 
     def add_child(self, child):
@@ -88,11 +88,18 @@ class Node:
     def get_children(self):
         return self.children
 
+    def get_data(self):
+        return self.data
+
+    def set_data(self, data):
+        self.data = data
+
 
 class Leaf:
-    def __init__(self, game):
-        self.game = game
+    def __init__(self, data):
+        self.data = data
         return
 
-    def calculate_utility(self):
-        return
+    def calculate_utility(self, fn):
+        return fn(self.data)
+

@@ -35,4 +35,5 @@ def test_load():
     tree.load_tree("do_not_delete.json")
 
     # Check children exists and first move is equal
-    assert tree.root.children.__len__() == 6 and tree.root.children[0].game.state[0][0] == game.state[0][0]
+    data = tree.root.children[0].get_data()
+    assert tree.root.children.__len__() == 6 and data.state[0][0] == game.state[0][0]
