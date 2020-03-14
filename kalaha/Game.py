@@ -1,12 +1,11 @@
 import copy
 
-class Game(object):
+
+class Game:
     def __init__(self):
         self.state = {0: [4] * 6 + [0],
                       1: [4] * 6 + [0]}
-        self.players = [0, 1]
         self.player_turn = 0
-        return
 
     def get_state(self):
         return copy.deepcopy(self.state)
@@ -16,11 +15,11 @@ class Game(object):
 
     def take_slot(self, pocket):
         if pocket > 5:
-            return
+            return False
         if pocket < 0:
-            return
+            return False
         if self.state[self.player_turn][pocket] == 0:
-            return
+            return False
 
         # Get players information
         opposite_player_turn = 0 if self.player_turn == 1 else 1
@@ -45,11 +44,12 @@ class Game(object):
         self.state[opposite_player_turn] = concat_states[7:len(concat_states)] + [self.state[opposite_player_turn][-1]]
 
         # Check for steal if slot is empty, on own side, and the opponent has pieces
-        if concat_states[pocket] == 1 and pocket < 6 and concat_states[pocket + ((5 - pocket)*2 + 2)] > 0:
+        if concat_states[pocket] == 1 and pocket < 6 and concat_states[pocket + ((5 - pocket) * 2 + 2)] > 0:
             self.capture(pocket)
 
         # New turn if pocket isnt in store
         self.player_turn = opposite_player_turn if pocket != 6 else self.player_turn
+        return True
 
     def capture(self, pocket):
         # Add pieces from both sides to player turns store
@@ -61,7 +61,6 @@ class Game(object):
         opposite_player_turn = 0 if self.player_turn == 1 else 1
         self.state[self.player_turn][-1] += self.state[opposite_player_turn][pocket]
         self.state[opposite_player_turn][pocket] = 0
-
 
     def is_terminal_state(self):
         # Is terminal state if one of the sides have no pieces
