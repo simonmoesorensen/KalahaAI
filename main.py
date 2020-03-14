@@ -1,4 +1,4 @@
-from kalaha.game import Game
+from kalaha.Game import Game
 
 def print_game(game):
     state = game.get_state()

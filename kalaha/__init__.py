@@ -1,2 +1,2 @@
-from kalaha.game import Game
+from kalaha.Game import Game
 Game = Game()
