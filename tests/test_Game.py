@@ -20,6 +20,7 @@ def test_terminal_state():
 
     assert game.is_terminal_state()
 
+
 def test_capture_pieces_on_end():
     game = Game()
 
@@ -41,12 +42,14 @@ def test_capture_pieces_on_end():
     state = game.get_state()
     assert state[0][6] == 42 and state[1][6] == 6 and sum(state[0][0:6] + state[1][0:6]) == 0
 
+
 def test_extra_turn_player1():
     game = Game()
 
     game.take_slot(2)
 
     assert game.get_player_turn() == 0
+
 
 def test_extra_turn_player2():
     game = Game()
@@ -55,6 +58,7 @@ def test_extra_turn_player2():
     game.take_slot(2)
 
     assert game.get_player_turn() == 1
+
 
 def test_player2_steal():
     game = Game()
@@ -68,6 +72,7 @@ def test_player2_steal():
 
     assert state[1][-1] == 9 and state[0][-1] == 0
 
+
 def test_player1_steal():
     # Run game
     game = Game()
@@ -79,3 +84,9 @@ def test_player1_steal():
     state = game.get_state()
 
     assert state[0][-1] == 8 and state[1][-1] == 0 and state[0][4] == 0 and state[0][5] == 5 and state[1][0] == 0
+
+
+def test_invalid_pocket():
+    game = Game()
+
+    assert not game.take_slot(7) and not game.take_slot(-1)
