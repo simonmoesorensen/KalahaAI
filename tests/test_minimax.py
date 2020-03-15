@@ -1,4 +1,4 @@
-from AI.TreeBuilder import Node, Leaf, TreeBuilder
+from AI.MancalaTreeBuilder import Node, Leaf, MancalaTreeBuilder
 from AI.Minimax import Minimax
 
 
@@ -10,20 +10,19 @@ def test_minimax_simple_case():
     tree.children[1].children = [Leaf(2), Leaf(4), Leaf(6)]
     tree.children[2].children = [Leaf(14), Leaf(2), Leaf(5)]
 
-    obj = TreeBuilder()
+    obj = MancalaTreeBuilder()
     obj.root = tree
 
     # Define the 'game'
-
     def utility_function(data):
         return data
 
-    def result_function(data, i):
-        return data.children[i]
+    def result_function(data, a):
+        return data.children[a]
 
     actions = range(0, 3)
 
-    minimax = Minimax(utility_function, result_function, actions)
+    minimax = Minimax(utility_function, result_function, 5, actions)
 
     assert 3 == minimax.alpha_beta_search(obj)[0] and 0 == minimax.alpha_beta_search(obj)[1]
 

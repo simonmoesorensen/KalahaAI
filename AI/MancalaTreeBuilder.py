@@ -1,5 +1,6 @@
 import copy
 import json
+
 from kalaha.Game import Game
 
 
@@ -13,7 +14,7 @@ class JsonEncoder(json.JSONEncoder):
         return super(JsonEncoder, self).default(obj)
 
 
-class TreeBuilder:
+class MancalaTreeBuilder:
     def __init__(self, rec_limit=3):
         self.rec_limit = rec_limit  # Recursion limit
         self.root = None
@@ -35,12 +36,12 @@ class TreeBuilder:
 
             # Add child if it was a valid move
             if game.take_slot(i):
-                node.add_child(
-                    Node(game) if not game.is_terminal_state() else Leaf(game)
-                )
+                node.add_child(move=i,
+                               child=Node(game) if not game.is_terminal_state() else Leaf(game)
+                               )
 
         # For every Node child, keep adding children
-        for child in node.get_children():
+        for child in node.get_children().values():
             if isinstance(child, Node):
                 self.build_from(child, rec_depth + 1)
 
@@ -56,23 +57,25 @@ class TreeBuilder:
 
         # Iterate children function
         def iter_children(children, parent):
-            for child in children:
+            for move, child in children.items():
+                move = int(move)
+
                 # Construct game
                 game = Game()
-                game.state[0] = child['game']['state']['0']
-                game.state[1] = child['game']['state']['1']
-                game.player_turn = child['game']['player_turn']
+                game.state[0] = child['data']['state']['0']
+                game.state[1] = child['data']['state']['1']
+                game.player_turn = child['data']['player_turn']
 
                 # Add a Leaf or Node to parent
                 if 'children' in child:
                     # Node
                     child_node = Node(game)
-                    parent.add_child(child_node)
+                    parent.add_child(move, child_node)
                     iter_children(child['children'], child_node)
                 else:
                     # Leaf
                     child_node = Leaf(game)
-                    parent.add_child(child_node)
+                    parent.add_child(move, child_node)
 
         iter_children(dict['children'], self.root)
 
@@ -80,10 +83,10 @@ class TreeBuilder:
 class Node:
     def __init__(self, data):
         self.data = data
-        self.children = []
+        self.children = {}
 
-    def add_child(self, child):
-        self.children.append(child)
+    def add_child(self, move, child):
+        self.children[move] = child
 
     def get_children(self):
         return self.children
@@ -94,12 +97,14 @@ class Node:
     def set_data(self, data):
         self.data = data
 
+    # Evaluation function
+    def calculate_utility(self, fn):
+        return fn(self.data)
+
 
 class Leaf:
     def __init__(self, data):
         self.data = data
-        return
 
     def calculate_utility(self, fn):
         return fn(self.data)
-

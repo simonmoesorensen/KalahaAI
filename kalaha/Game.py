@@ -88,6 +88,7 @@ class Game:
         # Empty board
         for _, state in self.state.items():
             for i in range(len(state)):
+                # Dont empty the score slot
                 if i == 6:
                     continue
                 state[i] = 0

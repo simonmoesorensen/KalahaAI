@@ -70,7 +70,7 @@ def test_player2_steal():
 
     state = game.get_state()
 
-    assert state[1][-1] == 9 and state[0][-1] == 0
+    assert state[1][-1] == 9 and state[0][-1] == 0 and state[0][1] == 0 and state[1][4] == 0
 
 
 def test_player1_steal():
