@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
         game_seq.append(slot)
         # Reverse slot if player 2 is playing
-        slot = abs(5 - slot) if player_turn == 1 else slot
+        # slot = abs(5 - slot) if player_turn == 1 else slot
         game.take_slot(slot)
 
         winner = 0
