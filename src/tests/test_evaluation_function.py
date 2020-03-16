@@ -1,4 +1,4 @@
-from src.AI import check_player_utility
+from src.AI.evaluation_function import check_player_utility
 
 def test_player_steal_and_AI_steal_and_player_extra_turn():
     # Player: 0 can steal and get 1 extra turn.
