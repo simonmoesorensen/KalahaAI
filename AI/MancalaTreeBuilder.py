@@ -36,9 +36,11 @@ class MancalaTreeBuilder:
 
             # Add child if it was a valid move
             if game.take_slot(i):
-                node.add_child(move=i,
-                               child=Node(game) if not game.is_terminal_state() else Leaf(game)
-                               )
+                if game.is_terminal_state:
+                    game.end_game()
+                    node.add_child(move=i, child=Leaf(game))
+                else:
+                    node.add_child(move=i, child=Node(game))
 
         # For every Node child, keep adding children
         for child in node.get_children().values():
