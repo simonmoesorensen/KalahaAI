@@ -68,6 +68,7 @@ class Game:
             return True
         if sum(self.state[self.player_turn if self.player_turn == 1 else 1][0:-1]) == 0:
             return True
+        return False
 
     def end_game(self):
         # Calculate final scores
@@ -78,9 +79,9 @@ class Game:
 
         # Determine winner
         winner = 0
-        if player1_sum > player2_sum:
+        if self.state[0][-1] > self.state[1][-1]:
             winner = 1  # Player 1
-        elif player2_sum > player1_sum:
+        elif self.state[1][-1] > self.state[0][-1]:
             winner = 2  # Player 2
         else:
             winner = -1  # Draw
@@ -88,6 +89,7 @@ class Game:
         # Empty board
         for _, state in self.state.items():
             for i in range(len(state)):
+                # Dont empty the score slot
                 if i == 6:
                     continue
                 state[i] = 0

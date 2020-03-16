@@ -1,4 +1,4 @@
-from AI.TreeBuilder import TreeBuilder, Node
+from AI.MancalaTreeBuilder import MancalaTreeBuilder, Node
 from kalaha.Game import Game
 import os
 import random
@@ -8,8 +8,9 @@ def test_save():
     # Setup tree
     game = Game()
 
-    recursion_limit = 2
-    tree = TreeBuilder(recursion_limit)
+    recursion_limit = 4
+
+    tree = MancalaTreeBuilder(recursion_limit)
     tree.set_root(Node(game))
     tree.build()
 
@@ -30,9 +31,10 @@ def test_load():
     game = Game()
     game.take_slot(0)
 
-    tree = TreeBuilder()
+    tree = MancalaTreeBuilder()
 
     tree.load_tree("do_not_delete.json")
 
     # Check children exists and first move is equal
-    assert tree.root.children.__len__() == 6 and tree.root.children[0].game.state[0][0] == game.state[0][0]
+    data = tree.root.children[0].get_data()
+    assert tree.root.children.__len__() == 6 and data.state[0][0] == game.state[0][0]
