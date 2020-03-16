@@ -106,5 +106,8 @@ class Leaf:
     def __init__(self, data):
         self.data = data
 
+    def get_data(self):
+        return self.data
+
     def calculate_utility(self, fn):
         return fn(self.data)

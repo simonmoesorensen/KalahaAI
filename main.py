@@ -30,8 +30,7 @@ if __name__ == "__main__":
         return children[a]
 
     # Construct minimax object
-    actions = range(0, 6)
-    minimax = Minimax(evaluation_function, result_function, max_depth=rec_limit, actions=actions)
+    minimax = Minimax(evaluation_function, result_function, max_depth=rec_limit)
 
     # Run game
     game = Game()
@@ -60,7 +59,7 @@ if __name__ == "__main__":
             v, slot = minimax.alpha_beta_search(tree)
             print("AI found utility: {0}, move: {1}".format(v, slot))
 
-        game_seq.append(slot)
+        game_seq.append((player_turn, slot))
         # Reverse slot if player 2 is playing
         # slot = abs(5 - slot) if player_turn == 1 else slot
         game.take_slot(slot)

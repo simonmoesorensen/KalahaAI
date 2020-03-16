@@ -78,9 +78,9 @@ class Game:
 
         # Determine winner
         winner = 0
-        if player1_sum > player2_sum:
+        if self.state[0][-1] > self.state[1][-1]:
             winner = 1  # Player 1
-        elif player2_sum > player1_sum:
+        elif self.state[1][-1] > self.state[0][-1]:
             winner = 2  # Player 2
         else:
             winner = -1  # Draw
