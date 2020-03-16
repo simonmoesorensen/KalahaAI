@@ -1,7 +1,5 @@
-from AI.MancalaTreeBuilder import MancalaTreeBuilder, Node
-from AI.Minimax import Minimax
-from AI.evaluation_function import evaluation_function
-from kalaha.Game import Game
+from src.AI import MancalaTreeBuilder, Node, Minimax, evaluation_function
+from src.kalaha import Game
 
 """
 This is the main script which runs the game with one player and one AI.
@@ -67,7 +65,6 @@ if __name__ == "__main__":
 
         game_seq.append((player_turn, slot))
         # Reverse slot if player 2 is playing
-        # slot = abs(5 - slot) if player_turn == 1 else slot
         game.take_slot(slot)
 
         winner = 0
@@ -78,4 +75,4 @@ if __name__ == "__main__":
 
     print("Game over, winner is Player {0}".format(winner))
     print("Game sequence:", game_seq)
-    input("Press any key to end...")
+    input("Press Enter to end...")

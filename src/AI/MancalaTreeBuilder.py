@@ -1,7 +1,7 @@
 import copy
 import json
 
-from kalaha.Game import Game
+from src.kalaha import Game
 
 
 class JsonEncoder(json.JSONEncoder):

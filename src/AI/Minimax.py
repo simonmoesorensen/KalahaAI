@@ -1,7 +1,7 @@
 import copy
 
-from AI.MancalaTreeBuilder import MancalaTreeBuilder, Node, Leaf
-from kalaha.Game import Game
+from src.AI import Leaf
+from src.kalaha import Game
 
 
 class Minimax:

@@ -1,4 +1,4 @@
-from kalaha.Game import Game
+from src.kalaha import Game
 
 
 def test_terminal_state():

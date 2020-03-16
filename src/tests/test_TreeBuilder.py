@@ -1,5 +1,5 @@
-from AI.MancalaTreeBuilder import MancalaTreeBuilder, Node
-from kalaha.Game import Game
+from src.AI import MancalaTreeBuilder, Node
+from src.kalaha import Game
 import os
 import random
 

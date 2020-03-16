@@ -1,5 +1,5 @@
-from AI.MancalaTreeBuilder import Node, Leaf, MancalaTreeBuilder
-from AI.Minimax import Minimax
+from src.AI import Node, Leaf, MancalaTreeBuilder
+from src.AI import Minimax
 
 
 def test_minimax_simple_case():
