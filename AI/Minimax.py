@@ -45,11 +45,11 @@ class Minimax:
             else:
                 v = max(v, self.min_value(result_node, a, b, depth + 1)[0])
 
-                node.set_data(data_copy)  # Reset to former game state
+            node.set_data(data_copy)  # Reset to former game state
 
-                # Alpha-beta pruning
-                if v >= b:
-                    return v, best_i
+            # Alpha-beta pruning
+            if v >= b:
+                return v, best_i
 
             if v > a:
                 best_i = i

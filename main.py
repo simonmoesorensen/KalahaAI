@@ -72,4 +72,4 @@ if __name__ == "__main__":
 
     print("Game over, winner is Player {0}".format(winner))
     print("Game sequence:", game_seq)
-
+    input("Press any key to end...")
