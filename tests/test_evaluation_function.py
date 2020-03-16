@@ -6,9 +6,9 @@ def test_player_steal_and_AI_steal_and_player_extra_turn():
              1: [4, 4, 1, 0, 4, 4, 0]}
 
     # AI score
-    assert check_player_utility(1, state, 0) == 5
+    assert check_player_utility(1, state) == 5
     # Player score
-    assert check_player_utility(0, state, 0) == -10
+    assert check_player_utility(0, state) == -10
 
 
 def test_check_AI_steal():
@@ -17,7 +17,7 @@ def test_check_AI_steal():
              1: [4, 4, 0, 4, 4, 0, 0]}
 
     # Check if AI (1) can steal
-    assert check_player_utility(1, state, 0) == 5
+    assert check_player_utility(1, state) == 5
 
 
 def test_check_AI_extra_turn():
@@ -26,7 +26,7 @@ def test_check_AI_extra_turn():
              1: [4, 0, 4, 4, 4, 0, 0]}
 
     # Check if AI (1) can make an extra move
-    assert check_player_utility(1, state, 0) == 5
+    assert check_player_utility(1, state) == 5
 
 
 def test_check_player_steal():
@@ -35,7 +35,7 @@ def test_check_player_steal():
              1: [4, 4, 4, 4, 4, 4, 0]}
 
     # Check if player (0) can steal
-    assert check_player_utility(0, state, 0) == -5
+    assert check_player_utility(0, state) == -5
 
 
 def test_check_player_extra_turn():
@@ -45,4 +45,4 @@ def test_check_player_extra_turn():
              1: [4, 4, 4, 4, 4, 4, 0]}
 
     # Check if player (0) can make an extra move
-    assert check_player_utility(0, state, 0) == -5
+    assert check_player_utility(0, state) == -5
