@@ -3,6 +3,12 @@ from AI.Minimax import Minimax
 from AI.evaluation_function import evaluation_function
 from kalaha.Game import Game
 
+"""
+This is the main script which runs the game with one player and one AI.
+
+The human player starts.
+"""
+
 def print_game(game):
     state = game.get_state()
     slots = list(range(0,6))

@@ -68,6 +68,7 @@ class Game:
             return True
         if sum(self.state[self.player_turn if self.player_turn == 1 else 1][0:-1]) == 0:
             return True
+        return False
 
     def end_game(self):
         # Calculate final scores

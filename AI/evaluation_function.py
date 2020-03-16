@@ -1,8 +1,8 @@
 def evaluation_function(game):
+    # Initial variables
     state = game.get_state()
     player_turn = game.get_player_turn()
     opposite_player_turn = 1 if player_turn == 0 else 0
-
     utility = 0
 
     # Check player's utility
@@ -10,7 +10,8 @@ def evaluation_function(game):
     # Check AI utility
     utility += check_player_utility(opposite_player_turn, state)
 
-    # Mancala score utility
+    # Compute difference in sum on each side
+    utility += (sum(state[1][0:6]) - sum(state[0][0:6]))
 
     # Compute player 1 score
     player_1_score = state[0][-1]
