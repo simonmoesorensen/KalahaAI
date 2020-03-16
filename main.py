@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
             print("AI computing best move")
             v, slot = minimax.alpha_beta_search(tree)
-            print("AI found utility: {0}, move: {1}".format(v, slot))
+            print("AI found utility: {0}, move: {1}".format(v, 5 - slot))
 
         game_seq.append((player_turn, slot))
         # Reverse slot if player 2 is playing
