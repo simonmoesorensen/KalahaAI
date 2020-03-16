@@ -38,6 +38,7 @@ if __name__ == "__main__":
     print("Easy: 0")
     print("Medium: 1")
     print("Hard: 2")
+    print("Very hard (and very slow): 3")
     rec_limit = 2 + check_input("Choose difficulty level: ") * 2
 
     # Minimax algorithm
@@ -65,15 +66,14 @@ if __name__ == "__main__":
             slot = check_input("Choose which slot to pick up (index at 0): ")
             # Player
         else:
-            print("AI computing tree")
             # AI
+            print("AI computing best move:", end="")
             tree = MancalaTreeBuilder(rec_limit)
             tree.set_root(Node(game))
             tree.build()
 
-            print("AI computing best move")
             v, slot = minimax.alpha_beta_search(tree)
-            print("AI found utility: {0}, move: {1}".format(v, 5 - slot))
+            print(" {1} (utility: {0})".format(v, 5 - slot))
 
         game_seq.append((player_turn, slot))
         # Reverse slot if player 2 is playing
