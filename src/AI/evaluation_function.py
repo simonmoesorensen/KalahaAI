@@ -10,14 +10,11 @@ def evaluation_function(game):
     # Check AI utility
     utility += check_player_utility(opposite_player_turn, state)
 
-    # Compute difference in sum on each side
-    utility += (sum(state[1][0:6]) - sum(state[0][0:6]))
-
     # Compute player 1 score
-    player_1_score = state[0][-1]
+    player_1_score = sum(state[0])
 
     # Compute player 2 score
-    player_2_score = state[1][-1]
+    player_2_score = sum(state[1])
 
     utility += player_2_score - player_1_score
     return utility

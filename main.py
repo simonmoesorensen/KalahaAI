@@ -23,10 +23,22 @@ def print_game(game):
     print(*player1_state[0:-1], sep=" | ", end=""); print(" | Score: {0}".format(player1_state[-1]))
     print("=======================================")
 
+def check_input(str):
+    while 1:
+        try:
+            val = int(input(str))
+            break
+        except ValueError:
+            print("Not a recognizable integer, please try again.")
+
+    return val
 
 if __name__ == "__main__":
     # Tree recursion limit
-    rec_limit = 6
+    print("Easy: 0")
+    print("Medium: 1")
+    print("Hard: 2")
+    rec_limit = 2 + check_input("Choose difficulty level: ") * 2
 
     # Minimax algorithm
     def result_function(node, a):
@@ -50,7 +62,7 @@ if __name__ == "__main__":
 
         slot = None
         if player_turn == 0:
-            slot = int(input("Choose which slot to pick up (index at 0): "))
+            slot = check_input("Choose which slot to pick up (index at 0): ")
             # Player
         else:
             print("AI computing tree")
